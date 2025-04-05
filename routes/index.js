@@ -21,7 +21,6 @@ function routerApi(app) {
   const router2 = express.Router();
   app.use("/api/v2", router2);
   router2.use('/', defaultV2Router);
-
 }
 
 export default routerApi;
