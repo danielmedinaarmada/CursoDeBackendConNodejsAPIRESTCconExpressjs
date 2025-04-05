@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const body = res.body;
+  const body = req.body;
   res.json({
     message: 'created',
     data: body,
