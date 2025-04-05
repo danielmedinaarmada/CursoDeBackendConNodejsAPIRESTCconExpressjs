@@ -36,4 +36,13 @@ router.get('/:id', (req, res) => {
   });
 });
 
+router.post("/", (req, res) => {
+  const body = res.body;
+  res.json({
+    message: 'created',
+    data: body,
+  })
+})
+
+
 export default router;
