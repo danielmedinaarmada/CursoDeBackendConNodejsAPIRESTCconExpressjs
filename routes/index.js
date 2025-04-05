@@ -1,6 +1,6 @@
-import productRouter from ('./products.router');
-import usersRouter from ('./users.router');
-import categoriesRouter from ('./categories.router');
+import productRouter from './products.router.js';
+import usersRouter from './users.router.js';
+import categoriesRouter from './categories.router.js';
 
 function routerApi(app) {
   app.use('/products', productRouter);
