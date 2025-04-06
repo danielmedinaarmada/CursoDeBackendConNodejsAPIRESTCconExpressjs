@@ -32,25 +32,43 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   const { id } = req.params;
-  const body = req.body;
-  res.json({
-    message: 'updated',
-    data: body,
-    id,
-  });
+  try {
+    const body = req.body;
+    const product = service.updated(id, body);
+    res.json(product);
+  } catch (error) {
+    res.status(404).json( {
+      id,
+      message: error.message
+    });
+  }
 });
 
 router.patch('/:id', (req, res) => {
   const { id } = req.params;
-  const body = req.body;
-  const product = service.updated(id, body);
-  res.json(product);
+  try {
+    const body = req.body;
+    const product = service.updated(id, body);
+    res.json(product);
+  } catch (error) {
+    res.status(404).json({
+      id,
+      message: error.message
+    });
+  }
 });
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
-  const respuesta = service.delete(id);
-  res.json(respuesta);
+  try {
+    const respuesta = service.delete(id);
+    res.json(respuesta);
+  } catch (error) {
+    res.status(404).json({
+      id,
+      message: error.message
+    });
+  }
 });
 
 export default router;
