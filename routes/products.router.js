@@ -1,7 +1,6 @@
 import express from 'express';
 import ProductsService from '../services/product.service.js';
 
-
 const router = express.Router();
 const service = new ProductsService();
 
@@ -44,21 +43,14 @@ router.put('/:id', (req, res) => {
 router.patch('/:id', (req, res) => {
   const { id } = req.params;
   const body = req.body;
-  res.json({
-    message: 'updated',
-    data: body,
-    id,
-  });
+  const product = service.updated(id, body);
+  res.json(product);
 });
-
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
-  const body = req.body;
-  res.json({
-    message: 'deleted',
-    id,
-  });
+  const respuesta = service.delete(id);
+  res.json(respuesta);
 });
 
 export default router;

@@ -6,7 +6,7 @@ class ProductsService {
     this.generate();
   }
 
-  generate(){
+  generate() {
     const limit = 100;
     for (let i = 0; i < limit; i++) {
       this.products.push({
@@ -22,7 +22,7 @@ class ProductsService {
     const newProduct = {
       id: faker.string.uuid(),
       ...data,
-    }
+    };
     this.products.push(newProduct);
     return newProduct;
   }
@@ -32,12 +32,29 @@ class ProductsService {
   }
 
   findOne(id) {
-    return this.products.find( item => item.id === id);
+    return this.products.find((item) => item.id === id);
   }
 
-  updated() {}
+  updated(id, changes) {
+    const index = this.products.findIndex((item) => item.id === id);
+    if (index === -1) throw new Error('Product not found');
+    const product = this.products[index];
+    this.products[index] = {
+      ...product,
+      ...changes,
+    };
+    return this.products[index];
+  }
 
-  delete() {}
+  delete(id) {
+    const index = this.products.findIndex((item) => item.id === id);
+    if (index === -1) throw new Error('Product not found');
+    this.products.splice(index, 1);
+    return {
+      id,
+      message: true,
+    };
+  }
 }
 
 export default ProductsService;
