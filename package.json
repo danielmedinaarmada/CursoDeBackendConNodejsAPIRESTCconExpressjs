@@ -20,6 +20,7 @@
     "prettier": "^3.5.3"
   },
   "dependencies": {
+    "@hapi/boom": "^10.0.1",
     "express": "^5.1.0"
   }
 }

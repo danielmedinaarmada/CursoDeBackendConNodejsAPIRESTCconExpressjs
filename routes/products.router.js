@@ -18,16 +18,13 @@ router.get('/filter', (req, res) => {
   res.send('Yo soy un filter');
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res, next) => {
   const { id } = req.params;
-  try{
+  try {
     const product = await service.findOne(id);
     res.json(product);
-  }catch(error) {
-    res.status(404).json( {
-      id,
-      message: error.message
-    });
+  } catch (error) {
+    next(error);
   }
 });
 
@@ -37,44 +34,35 @@ router.post('/', async (req, res) => {
   res.status(201).json(newProduct);
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', async (req, res, next) => {
   const { id } = req.params;
   try {
     const body = req.body;
     const product = await service.updated(id, body);
     res.json(product);
   } catch (error) {
-    res.status(404).json( {
-      id,
-      message: error.message
-    });
+    next(error);
   }
 });
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', async (req, res, next) => {
   const { id } = req.params;
   try {
     const body = req.body;
     const product = await service.updated(id, body);
     res.json(product);
   } catch (error) {
-    res.status(404).json({
-      id,
-      message: error.message
-    });
+    next(error);
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', async (req, res, next) => {
   const { id } = req.params;
   try {
     const respuesta = await service.delete(id);
     res.json(respuesta);
   } catch (error) {
-    res.status(404).json({
-      id,
-      message: error.message
-    });
+    next(error);
   }
 });
 
