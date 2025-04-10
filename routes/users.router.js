@@ -6,6 +6,7 @@ router.get('/', (req, res) => {
   const { limit, offset } = req.query;
   if (limit && offset) {
     res.json({
+      message: 'Parámetros recibidos',
       limit,
       offset,
     });
